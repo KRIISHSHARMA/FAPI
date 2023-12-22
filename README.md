@@ -1,6 +1,6 @@
-1. INTRO
+# 1. INTRO
 
-1.1 5G NR
+## 1.1 5G NR
 
 -  FAPI is an interface, which defines the interface between MAC-Layer#2 and PHY – Layer#1 for small cells.
  
@@ -21,7 +21,7 @@
 
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/442caf9c-fb2b-4c0e-817b-eebdecbbfbac)
 
-1.2 PHY API
+## 1.2 PHY API
 
 
 
