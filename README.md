@@ -27,6 +27,16 @@
 
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/c097458b-e442-48de-bd49-ca385e22316e)
 
+- Below is an example of how the different L2/L3 protocol layer will interact with the PHY API . in the example given below a PHY control entity is responsible for configuration procedures (P5). The MAC layer is responsible for the exchange of data-plane messages with the PHY (P7).
+-  The PHY configuration sent over the P5 interface may be determined using SON techniques, information model parameters sent from an OAM system, or a combination of both methods. If carrier aggregation is supported, then one instance of the PHY API exists for each component carrier, as defined in 3GPP TS
+  - [SON technique](https://www.snstelecom.com/son) : SON (Self-Organizing Network) technology is like a smart system for mobile networks. It helps save money by getting rid of the need for people to manually set up and manage the network. From the beginning, when the network is first set up, all the way through its operation, SON takes care of things like adjusting and fixing issues without needing constant human intervention. This not only makes the network work better for users but also makes it cheaper for the companies running the mobile network, helping them save money and improve their overall financial situation.
+ - [OAM system](https://www.zte.com.cn/global/about/magazine/zte-technologies/2021/2-en/special-topic/6.html) : OAM technology is used to collect statistics on quality data such as packet loss, delay and jitter of traffic streams 
+
+
+38.104 [7].
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/c157e057-367d-49c9-9e43-420f45dc393d)
+
+
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/096aae09-893a-4e53-b3f9-2c074db53141)
 
 - [sorce](https://www.5gtechnologyworld.com/what-is-5g-femto-application-platform-interface-5g-fapi-faq/)
