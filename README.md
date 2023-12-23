@@ -49,6 +49,10 @@
   - Slot configuration messages, which include information required by the PHY to encode and decode data
   - Downlink data messages to transfer **MAC PDUs to the PHY.**
   - Uplink data messages to transfer **MAC PDUs, Uplink Control Information ,Sounding Reference Signal and RACH PDUs from the PHY**
+ 
+ # 2 PHY API PROCEDURES
+
+ 
 
 
 
