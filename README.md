@@ -52,6 +52,37 @@
  
  # 2 PHY API PROCEDURES
 
+ 1. CONTROL CONFIG PROCEDURES (P5) :
+    - P5 deals with PHY states (idle , configured and running)
+    - The Control configuration procedures supported by the L1 FAPI over P5 interface are listed below:
+       1. Initialization
+       2. Termination
+       3. Restart
+       4. Reset
+       5. Error notification
+       6. Query
+       7. Reconfiguration
+
+2. DATA PLANE CONFIG PROCEDURES / SLOT (P7) : The slot procedures have two purposes. Firstly, they are used to control the DL and UL
+frame structures. Secondly, they are used to transfer the slot data between the L2/L3 software and PHY. The slot procedures supported by the PHY API are
+   - Transmission of a 1ms Subframe message
+   - Synchronization of SFN/SF between the L2/L3 software and PHY
+   - Transmission of the BCH transport channel
+   - Transmission of the PCH transport channel
+   - Transmission of the DLSCH transport channel and reception of ACK/NACK response
+   - Transmission of the MCH transport channel
+   - Reception of the RACH transport channel
+   - Reception of the ULSCH transport channel and transmission of ACK/NACK response
+   - Reception of the sounding reference signal
+   - Reception of CQI and RI reporting
+   - Reception of scheduling request information SR is a special Physical Layer message for UE to ask Network to send UL Grant (DCI Format 0_0 /0_1) so that UE can transmit PUSCH
+
+    
+
+ # 2.1  Configuration Procedures (P5)
+    
+
+
  
 
 
