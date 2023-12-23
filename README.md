@@ -76,7 +76,7 @@ frame structures. Secondly, they are used to transfer the slot data between the 
    - Reception of the sounding reference signal
    - Reception of CQI and RI reporting
    - Reception of scheduling request information SR is a special Physical Layer message for UE to ask Network to send UL Grant (DCI Format 0_0 /0_1) so that UE can transmit PUSCH
-
+- P7 defines what is transmitted and received over the air every subframe.
     
 
  # 2.1  Configuration Procedures (P5)
