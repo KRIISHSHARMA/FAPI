@@ -80,12 +80,77 @@ frame structures. Secondly, they are used to transfer the slot data between the 
     
 
  # 2.1  Configuration Procedures (P5)
-    
+
+ - Occurs infrequently
+
+   
+![FAPI-State](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/9791c806-6c1f-45a3-a91b-2742f04632e7)
+
+- PHY starts in IDLE mode , where MAC can query the PHY's capabilities using PARAM message sequence
+- PHY can be moved from IDLE to CONFIGURED state by the MAC initiating the CONFIG message
+- PHY in CONFIGURED state can be configured further , or have its PHY capabilities quried
+- PHY can be moved from CONFIGURED to RUNNING state by the MAC initiating the START message sequence
+- PHY in RUNNING state is transmitting over the air and provides a small cell service
+- To stop the small cell the MAC must initiate the STOP message sequence
+
+
+![rk-EH4WB3](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/64ec27cf-7df9-4054-be82-fe1339b1bf8b)
+
+- Message control Procedures
+  1. PARAM.request/PARAM.response
+  2. CONFIG.request/CONFIG.response
+  3. START.request
+  4. STOP.request
+  5. STOP.indication
+
+- When timeouts for P5 request procedures are supported, P5 procedures (from request to response/indication that signals the end of the procedure) are expected to last no more than the time value declared in TLV 0x015F. If a procedure lasts more than that amount, L2/L3 software shall trigger a RESET.request for those P5 procedures that change PHY state.
+
+![CAysGCg](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/7cb53f80-7ae7-461b-a37f-b5a85fc1e769)
+
+ - [resource](https://hackmd.io/@MingHung/StudyBook/%2F%40MingHung%2FFAPI#2112-Config-message-exchange-procedure)
+- [blog resource](https://www.techplayon.com/5g-fapi-femtocell-application-programming-interface/)
+ 
+ # 2.1.1 INTIALIZATION 
+ - This procedure moves the PHY from IDLE state to RUNNING state via CONFIGURED state
+ - The different stages of initalization are :
+   1. PARAM message exchange procedure
+   2. CONFIG message exchange procedure
+   3. START message exhange procedure
+
+![vxFd9sV](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/90cd4860-e19b-4026-b7ec-585d3833eab8)
+
+  
+  
+# 2.1.1.1 PARAM message exchange procedure
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  
-
-
-
-
-
