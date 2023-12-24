@@ -238,8 +238,26 @@ to the PHY.
 - **PHY GROUPS** :The set of all PHYs supported by the PHY Layer is partitioned into PHY Groups. P5 APIs terminating in one PHY Group cannot impact or characterize other PHY Groups or PHYs belonging to other PHY Groups.
 
 ## 2.1.9 PHY Instantiation
+- This process describes the PHY Profile discovery and selection process, which leads to defining PHYs (and corresponding PHY IDs).
+  1. **Step 1 and 2 (PHY Profile Discovery)** : L2/L3 uses the PHY Query Procedure (steps 1 and 2 in the figure) towards Common or PHY Group Context (see section 2.1.10), to discover the supported PHY Profiles and a map indicating which PHY and DFE(digital front end) profiles are pairable.
+     - Note: Some PHY implementations may pre-define PHY IDs (e.g. < 255), in which case this procedure is not needed
+  2. **Step 3 and 4 (DFE profile Discovery)** : L2/L3 uses the DFE Query Procedure in SCF-223 [9] (steps 3 and 4 in the figure) towards DFE, to discover the supported DFE Profiles
+  3. **Step 5 (PHY PROFILE SELECTION)** : L2/L3 selects a PHY profile , via the **CONFIG.reuest** message towards COmmon or PHY Group Context.
+     - **Note: Common or PHY Group Context does not support PHY (IDLE, CONFIGURED, RUNNING) states, so the state diagram from Figure 2-1 does not apply to PHY ID#255.**
+   4. **Step 6 and 7 (PHY definition)** : PHY IDs < 255 are defined (but cannot be configured), based on the selected profile (step 6).
+      - CONFIG.response (step 7) announces successful configuration, if PHY Definition succeeds. If unsuccessful, an error code will indicate the failure cause and the PHY Instantiation fails.
+   5. **Step 8 and 9 (DFE profile selection)** : L2/L3 selects a DFE profile, via the DFE **CONFIG.request** message (step 8).
+      - DFE CONFIG.response (step 9) announces successful configuration. If unsuccessful, an error code will indicate the failure cause the PHY Instantiation fails.
+   6. **Step 10 (FEU Configuration and initiallization)** : L2/L3 executes the Configuration and Initialization procedures towards DFE and RF (step 8).
+      - The config and initialization procedures towards FEU is in SCF-225[10]
+   7. **Step 11 (PHY instantiation)** : When the DFE and RF have both entered RUNNING state, PHY IDs defined through Profile selection become configurable (step 11), after successful DFE and PHY Profile selection.If newly defined, these PHY IDs may be considered IDLE.
 
 
+- IF PHY IDs existed in any state (IDLE/CONFIGURED/RUNNING) prior to any of the PHY Profile Selection and DFE Profile Selection steps, they remain in the same states, as long as none of their capabilities or configurations are not impacted by the PHY or DFE Profile Selections, otherwise ERROR.indication will be triggered by these PHY IDs.
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/10d0f62d-d820-484b-86b4-df62f4c424b6)
+
+## 2.1.10 Common and PHY Group Contexts
 
 
 
