@@ -193,9 +193,68 @@ CONFIGURED state. To restart transmission, it should follow the START message ex
 
 ![P2TIXoz](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/6c0bd858-18d2-43a8-b95f-954a93587ed0)
 
+## 2.1.5 Reconfigure
+- 2 Methods :
+  1. a major reconfiguration where the PHY is stopped
+  2. a minor reconfiguration where the PHY continues running
+
+- Major Reconfig : It is used when the L2/L3 software wants to make significant changes to the configuration of the PHY
+  - The STOP message exchange, shown in Figure 2-6, is followed to halt the PHY and move it to theCONFIGURED state. The CONFIG message exchange, shown in Figure 2-4, is used to reconfigure the PHY. Finally, the START message exchange, shown in Figure 2-5, is followed to start the PHY and return it to the RUNNING state.
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/dca8e80c-96ef-40f8-a17d-8fea22ac9fa6)
+
+
+- Minor Reconfig : The minor reconfiguration procedure is shown in Figure 2-10. It is typically used in conjunction with a RRC system information update.
+- In the slot where the L2/L3 software requires the configuration change it sends the CONFIG.request message to the PHY. Only a limited subset of CONFIG TLVs may be sent, these are indicated by the PHY in PARAM.response.
+- Reconfiguring the PHY while in the RUNNING state has a further restriction, the CONFIG.request message must be sent before the DL_TTI.request and UL_TTI.request message.
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/ea64af9b-1817-4820-afc4-5ffb20eaa6e5)
+
+
+## 2.1.6 Query
+- It is used by the L2/L3 software to determine the configuration and operational status of the PHY
+- The PARAM message exchange, shown in Figure 2-3, is used. This signalling sequence can be followed when the PHY is stopped, in the IDLE state and, optionally, the CONFIGURED state.
+
+## 2.1.7 Notification
+- The PHY sends a notification message when it has an event of interest for the L2/L3 software. Currently, there is one notification message called ERROR.indication.
+- It is used by the PHY to indicate that the L2/L3 software has sent invalid information
+to the PHY.
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/fd21b4fa-cab4-40ed-ba82-18721ffb7108)
+
+## 2.1.8 Protocol Negotiation
+- The procedure allows L2/L3 and PHY to ensure that the same FAPI version is used.
+  1. **Step 1** : Protocol negotiation triggered by L2/L3 sending a **PARAM.request** message with a `protocolVersion` indicating a FAPI protocol version supported by L2/L3.
+     - Note: typically, this would be the highest FAPI version that L2/L3 supports.
+   2. **Step 2** : PHY replies to MAC with a **PARAM.response** message which contains :
+      1. phyFapiProtocolVersion: the highest FAPI protocol version that PHY supports
+      2. phyFapiNegotiatedProtocolVersion: the FAPI version that PHY assumes in subsequent P5/P7 exchanges with L2/L3.
+
+- After step 2, both L2/L3 and PHY are assumed to use the same protocol version, as indicated by phyFapiNegotiatedProtocolVersion.
+- **Protocol negotiation can only happen when all defined PHYs are in IDLE state.**
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/99eee73c-631f-4dcb-8572-31da8a850413)
+
+- **PHY GROUPS** :The set of all PHYs supported by the PHY Layer is partitioned into PHY Groups. P5 APIs terminating in one PHY Group cannot impact or characterize other PHY Groups or PHYs belonging to other PHY Groups.
+
+## 2.1.9 PHY Instantiation
 
 
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
