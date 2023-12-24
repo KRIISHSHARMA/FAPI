@@ -110,7 +110,7 @@ frame structures. Secondly, they are used to transfer the slot data between the 
  - [resource](https://hackmd.io/@MingHung/StudyBook/%2F%40MingHung%2FFAPI#2112-Config-message-exchange-procedure)
 - [blog resource](https://www.techplayon.com/5g-fapi-femtocell-application-programming-interface/)
  
- # 2.1.1 INTIALIZATION 
+ ## 2.1.1 INTIALIZATION 
  - This procedure moves the PHY from IDLE state to RUNNING state via CONFIGURED state
  - The different stages of initalization are :
    1. PARAM message exchange procedure
