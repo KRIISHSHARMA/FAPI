@@ -79,7 +79,7 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 - P7 defines what is transmitted and received over the air every subframe.
     
 
- # 2.1  Configuration Procedures (P5)
+ ## 2.1  Configuration Procedures (P5)
 
  - Occurs infrequently
 
@@ -123,7 +123,7 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 - For Delay Management with Timestamps, the initialization procedure is completed when the PHY sends the L2/L3 software a START.response message.
 - For Delay Management without Timestamps, the initialization procedure is completed when the PHY sends the L2/L3 software a TIMING.indication message.
 
-# 2.1.1.1 PARAM message exchange procedure
+## 2.1.1.1 PARAM message exchange procedure
 - Its purpose is to allow the L2/L3 software to collect info about the PHY configuration an current state. (only in IDLE and CONFIGURED state)
 - PHY returns the following info (PARAM.response) according to its current state
 
@@ -147,7 +147,7 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 - uint16_t : unassigned integer of 16 bits
 - uint8_t : unassigned integer of 8 bits 
 
-# 2.1.1.2 Config message exchange procedure
+## 2.1.1.2 Config message exchange procedure
 - Its purpose is to allow the L2/L3 software to configure the PHY.
 - Can be used in any state though there are some small differences depending on PHY state
   1. If the PHY is in the IDLE state, the CONFIG.request message, sent by the L2/L3 software, must include all mandatory TLVs. The mandatory TLVs are indicated by the PHY in the PARAM.response message. If all mandatory TLVs are included, and set to values supported by the PHY, L1 will return a CONFIG.response message, indicating it is successfully configured and has moved to the CONFIGURED state. If the CONFIG.request message has missing mandatory TLVs, invalid TLVs, or unsupported TLVs, the PHY will return a CONFIG.response message, indicating an incorrect
@@ -158,7 +158,7 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/ccc87332-cc24-4c20-ad59-54dd4f2ad3fb)
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/c7e179bf-f165-4d2d-8e83-b08aeb24dc17)
 
-# 2.1.1.3 Start message exchange procedure
+## 2.1.1.3 Start message exchange procedure
 - Its purpose is to instruct a configured PHY to start transmitting as a gNB.
 - L2/L3 software initiates this procedure by sending a START.request message to the PHY
 - If the PHY is in the CONFIGURED state, and it supports SFN/SL-based synchronization, it will issue a SLOT indication. After the PHY has sent its first **SLOT.indication** message, it enters the RUNNING state.
@@ -168,7 +168,7 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 
 ![nhqOidF](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/07e637a2-f4e5-4687-ac43-9df803929064)
 
-# 2.1.2 Termination (stop)
+## 2.1.2 Termination (stop)
 - The termination procedure is used to move the PHY from the RUNNING state to the CONFIGURED state. This stops the PHY transmitting as a gNB.
 - initiated by the L2/L3 software sending a **STOP.request** message.
 - If the **STOP.request** message is received by the PHY while operating in the RUNNING state, it will stop all TX and RX operations and return to the CONFIGURED state. When the PHY has completed its stop procedure, a STOP.indication message is sent to the L2/L3 software.
@@ -177,7 +177,7 @@ CONFIGURED state, it will return an **ERROR.indication** message including an **
 
 ![PBwLhZ7](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/0f505c92-28a7-4273-9461-f7d0d156683a)
 
-# 2.1.3 Restart
+## 2.1.3 Restart
 
 - It can be used by the L2/L3 software When it needs to stop transmitting, but later wants to restart transmission using the same configuration.
 - To complete this procedure, the L2/L3 software can follow the
@@ -186,7 +186,7 @@ CONFIGURED state. To restart transmission, it should follow the START message ex
 
 ![j3L8Ool](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/3096aea9-5e23-4d8b-8632-f7d88cd2b89e)
 
-# 2.1.4 Reset
+## 2.1.4 Reset
 
 
 
