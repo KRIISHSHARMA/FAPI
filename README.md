@@ -122,27 +122,17 @@ frame structures. Secondly, they are used to transfer the slot data between the 
   
   
 # 2.1.1.1 PARAM message exchange procedure
+- Its purpose is to allow the L2/L3 software to collect info about the PHY configuration an current state. (only in IDLE and CONFIGURED state)
+- PHY returns the following info (PARAM.response) according to its current state
 
+![KwfdWlq](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/5e572354-8604-492c-80f9-3a45769bae9e)
+![P7p9uXU](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/97abe830-e7b2-44dd-81b8-9815c2e8f9b4)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- From the above figure , we can see that the PARAM message exchange is initiated by L2/L3 software sending a PARAM.request message to PHY.
+- L2/L3 software may or may not (recommended) start a guard timer to wait for the response from L1 .
+- If everything is going great PARAM.response is sent by PHY as a response
+- In the IDLE and CONFIGURED states, this message will include the current PHY state and a list of configuration information
+- In the RUNNING state, this message will indicate an INVALID_STATE error. To determine the PHY capabilities it must be moved to the CONFIGURED state using the termination procedure
 
 
 
