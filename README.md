@@ -134,10 +134,27 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 - In the IDLE and CONFIGURED states, this message will include the current PHY state and a list of configuration information
 - In the RUNNING state, this message will indicate an INVALID_STATE error. To determine the PHY capabilities it must be moved to the CONFIGURED state using the termination procedure
 
+- [TLV](https://devopedia.org/tlv-format) : TLV (Tag-Length-Value) is a binary format used to represent data in a structured way
+![1688 1676742752](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/d6bf1ad1-36b4-4d0a-a7c7-90ec7559d330)
 
+- if L2/L3 does not signal any TLVs , the message length in the genereic header = 0
 
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/d8b03246-25c7-49b0-8b8f-722e1993ad1d)
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/6e07c463-df76-446a-aba7-7ed15cf047df)
 
+- uint16_t : unassigned integer of 16 bits
+- uint8_t : unassigned integer of 8 bits 
 
+# 2.1.1.2 Config message exchange procedure
+- Its purpose is to allow the L2/L3 software to configure the PHY.
+- Can be used in any state though there are some small differences depending on PHY state
+  1. If the PHY is in the IDLE state, the CONFIG.request message, sent by the L2/L3 software, must include all mandatory TLVs. The mandatory TLVs are indicated by the PHY in the PARAM.response message. If all mandatory TLVs are included, and set to values supported by the PHY, L1 will return a CONFIG.response message, indicating it is successfully configured and has moved to the CONFIGURED state. If the CONFIG.request message has missing mandatory TLVs, invalid TLVs, or unsupported TLVs, the PHY will return a CONFIG.response message, indicating an incorrect
+  2. If the PHY is in the CONFIGURED state, the CONFIG.request message, sent by the L2/L3 software, may include only the TLVs that are required to change the PHY to a new configuration. If the PHY supports these new values, it will return a CONFIG.response message, indicating it has been successfully configured. However, if the CONFIG.request message includes invalid TLVs, or unsupported TLVs, the PHY will return a CONFIG.response message, indicating an incorrect configuration. In this case, all received TLVs will be ignored and the PHY will continue with its previous configuration. In both cases, if the PHY receives a CONFIG.request while in the CONFIGURED state it will remain in the CONFIGURED state.
+  3. If the PHY is in the RUNNING state, then a limited subset of CONFIG TLVs may be sent in a CONFIG.request message. The permitted TLVs are indicated by the PHY in PARAM.response. If the CONFIG.request message has invalid TLVs, or TLVs which must not be reconfigured in the RUNNING state, the PHY will return a CONFIG.response message, indicating an incorrect configuration. In this case, it will remain in the RUNNING state and all received TLVs will be ignored.
+
+![4XWZx44](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/0a6079f0-af44-487d-9745-8816f919fa21)
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/ccc87332-cc24-4c20-ad59-54dd4f2ad3fb)
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/c7e179bf-f165-4d2d-8e83-b08aeb24dc17)
 
 
 
