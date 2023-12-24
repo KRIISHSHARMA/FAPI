@@ -187,6 +187,11 @@ CONFIGURED state. To restart transmission, it should follow the START message ex
 ![j3L8Ool](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/3096aea9-5e23-4d8b-8632-f7d88cd2b89e)
 
 ## 2.1.4 Reset
+- This procedure is used when the L2/L3 software wants to return the PHY to the IDLE state. Under normal conditions, this can only be achieved by terminating the PHY (as shown in Figure 2-6) and then resetting the PHY.
+- When L2 detects P5 timeout, it instead invokes RESET.request directly.
+- For a dedicated PHY or PHY Group contexts, the RESET procedure is complete when **RESET.indication** is received. For common context, the RESET procedure is complete when **CCONTEXT_READY.indication** is received.
+
+![P2TIXoz](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/6c0bd858-18d2-43a8-b95f-954a93587ed0)
 
 
 
