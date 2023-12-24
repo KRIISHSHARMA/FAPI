@@ -119,8 +119,10 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 
 ![vxFd9sV](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/90cd4860-e19b-4026-b7ec-585d3833eab8)
 
-  
-  
+ - For SFN/SL Synchronization, the initialization procedure is completed when the PHY sends the L2/L3 software a SLOT.indication message.
+- For Delay Management with Timestamps, the initialization procedure is completed when the PHY sends the L2/L3 software a START.response message.
+- For Delay Management without Timestamps, the initialization procedure is completed when the PHY sends the L2/L3 software a TIMING.indication message.
+
 # 2.1.1.1 PARAM message exchange procedure
 - Its purpose is to allow the L2/L3 software to collect info about the PHY configuration an current state. (only in IDLE and CONFIGURED state)
 - PHY returns the following info (PARAM.response) according to its current state
@@ -155,6 +157,37 @@ frame structures. Secondly, they are used to transfer the slot data between the 
 ![4XWZx44](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/0a6079f0-af44-487d-9745-8816f919fa21)
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/ccc87332-cc24-4c20-ad59-54dd4f2ad3fb)
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/c7e179bf-f165-4d2d-8e83-b08aeb24dc17)
+
+# 2.1.1.3 Start message exchange procedure
+- Its purpose is to instruct a configured PHY to start transmitting as a gNB.
+- L2/L3 software initiates this procedure by sending a START.request message to the PHY
+- If the PHY is in the CONFIGURED state, and it supports SFN/SL-based synchronization, it will issue a SLOT indication. After the PHY has sent its first **SLOT.indication** message, it enters the RUNNING state.
+- If the PHY is in the CONFIGURED state, and it supports `Delay Management with Timestamps` (see section 2.2.1.1), it will issue a **START.response**, after which it enters the RUNNING state.
+- If the PHY is in the CONFIGURED state, and it supports Delay Management without Timestamps (see section 2.2.1.2), it will issue a  **TIMING.indication**, after which it enters the RUNNING state.
+- If the PHY receives a **START.request** in either the IDLE or RUNNING state, it will return an **ERROR.indication** including an **INVALID_STATE** error.
+
+![nhqOidF](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/07e637a2-f4e5-4687-ac43-9df803929064)
+
+# 2.1.2 Termination (stop)
+- The termination procedure is used to move the PHY from the RUNNING state to the CONFIGURED state. This stops the PHY transmitting as a gNB.
+- initiated by the L2/L3 software sending a **STOP.request** message.
+- If the **STOP.request** message is received by the PHY while operating in the RUNNING state, it will stop all TX and RX operations and return to the CONFIGURED state. When the PHY has completed its stop procedure, a STOP.indication message is sent to the L2/L3 software.
+- If the STOP.request message was received by the PHY while in the IDLE or
+CONFIGURED state, it will return an **ERROR.indication** message including an **INVALID_STATE** error. However, in this case the PHY was already stopped.
+
+![PBwLhZ7](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/0f505c92-28a7-4273-9461-f7d0d156683a)
+
+# 2.1.3 Restart
+
+- It can be used by the L2/L3 software When it needs to stop transmitting, but later wants to restart transmission using the same configuration.
+- To complete this procedure, the L2/L3 software can follow the
+STOP message exchange shown in Figure 2-6. This moves the PHY to the
+CONFIGURED state. To restart transmission, it should follow the START message exchange, shown in Figure 2-5, moving the PHY back to the RUNNING state.
+
+![j3L8Ool](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/3096aea9-5e23-4d8b-8632-f7d88cd2b89e)
+
+# 2.1.4 Reset
+
 
 
 
