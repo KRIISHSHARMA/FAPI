@@ -258,6 +258,36 @@ to the PHY.
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/10d0f62d-d820-484b-86b4-df62f4c424b6)
 
 ## 2.1.10 Common and PHY Group Contexts
+- When a supervisory PHY concept (e.g. PHY ID 255 or PNF in SCF-225 [10]) is supported, the Common Context is supported in this supervisory PHY.
+- only terminates P5 but not P7
+- Cannot be in PHY RUNNING state
+- can be queried (section 2.1.6)
+- can be configured
+- can be reset
+- The scope of a P5 API :
+  1. A specific PHY : PHY ID is dedicated (eg PHY ID < 255) NO PHY group may be associated with the API
+  2. Common Context : PHY Group Identifier is absent and PHY ID is common (eg PHY ID = 255)
+  3. PHY Group context : PHY Group Identifieris present ; in this case PHY ID must be common (eg PHY ID =255)
+
+## 2.1.11 PHY/FEU Interface
+- In some cases for eg splt 7.2x PHY and FEU interaface may be subject to disconnection or synchronization events.These events may be observable at L2/L3 software, via PHY (P5 interface), or via FEU (P19-C interface in SCF-223 [9]).
+- An L2 that can observe such events, shall take the following actions:
+1. When a PHY’s associated FEU is determined to have become disconnected:
+  - L2/L3 software shall transition the corresponding PHY and FEU to Idle, via the
+  mechanisms in section 2.1.
+  - L2/L3 software shall re-query the FEU’s capability (as well as any associated
+PHY’s capability), after the FEU is determined to have been reconnected.
+2. When a PHY or its associated FEU is determined to have become
+desynchronized:
+  - L2/L3 software shall stop any RUNNING PHY, via the mechanisms in section
+  2.1
+  - When the PHY and its associated FEU are both determined to be
+  synchronized, L2 may transition the PHY to RUNNING state, via the
+  mechanisms in section 2.1
+- Query
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/3f4ff26e-f686-4b0e-9712-776f6219edc1)
+
 
 
 
