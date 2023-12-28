@@ -351,7 +351,7 @@ desynchronized:
 
 3. relevant P7 messages for Slot S received by PHY Receive Window mechanism:
    
-   1.**Inside the Timing Window interval**: Messages received during this time frame are dealt with right away. These messages typically involve actions related to sending data (transmission), receiving data (reception), or configuring settings. The actions are applied to a designated time slot called Slot S.
+   1. **Inside the Timing Window interval**: Messages received during this time frame are dealt with right away. These messages typically involve actions related to sending data (transmission), receiving data (reception), or configuring settings. The actions are applied to a designated time slot called Slot S.
    2. **Outside the Timing Window interval**: Messages arriving outside this designated time window are tagged by the PHY as either "too early" or "too late," depending on when they show up. These tagged messages are then collected to create a timing report, which is sent to Layer 2 (L2).
 
 
