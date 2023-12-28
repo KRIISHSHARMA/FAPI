@@ -288,7 +288,44 @@ desynchronized:
 
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/3f4ff26e-f686-4b0e-9712-776f6219edc1)
 
+# 2.2 SLOT PROCEDURE (P7) 
+- Used to control control the DL and UL frame structure
+- Used to transfer slot data between the L2/L3 software and PHY.
+- Slot procedures supported by the PHY API are :
+  1. Transmission of a 62.5us, 125us, 250us, 500us or 1ms SLOT message
+  2. Synchronization of SFN/Slot between the L2/L3 software and PHY
+  3. Transmission of the BCH transport channel
+  4. Transmission of the PCH transport channel
+  5. Transmission of the DL-SCH transport channel
+  6. Transmission of the downlink control information (DCI)
+  7. Transmission of the CSI reference signal
+  8. Reception of the RACH transport channel
+  9. Reception of the UL-SCH transport channel
+  10. Reception of the uplink control information (UCI)
+  11. Reception of the sounding reference signal
 
+- P7 messages - Main data path interface
+  1. DL_TTI.request
+  2. UL_TTI.request
+  3. SLOT.indication
+  4. UL_DCI.request
+  5. TX_Data.request
+  6. RX_Data.indication
+  7. CRC.indication
+  8. UCI.indication
+  9. RACH.indication
+
+# 2.2.1 DELAY MANAGEMENT 
+- This section describes two delay management mechanisms, based on receive window maintained at L1, per message type.
+- Note that receive windows are anchored to slots. The slot being anchored to is specific to each of the PDU(s) carried in the message.
+- In simpler terms, this section is talking about two ways to manage delays in a communication system. The delays are based on something called a "receive window," which is like a time frame during which a message is expected to be received.
+- Imagine you're sending a message that contains different types of information. For example, let's say you're sending a message that includes both a picture and a video. Each type of information has its own time frame (receive window) during which it should be received.
+
+  -  e.g. if a [DL_TTI](https://devopedia.org/5g-nr-transmission-time-interval).request carries a 15 kHz PDSCH PDU and a 30 kHz SSB PDU, the 15 PDSCH PDU reception shall be handled according to the Rx window for the 15 kHz slot and the SSB PDU reception shall be handled according to the Rx window for the 30 kHz slot, relevant to the DL_TTI.request message.
+ 
+  -  So, in the example given, if your message includes a 15 kHz picture and a 30 kHz video, each part of the message has its own specific time frame for when it should be received. The system is designed to handle the reception of the 15 kHz picture based on a certain time frame (anchored to a slot related to 15 kHz), and the 30 kHz video is handled based on a different time frame (anchored to a slot related to 30 kHz).
+ 
+  -  Essentially, it's a way to make sure that different types of information within a message are processed and received at the right times, depending on their specific characteristics.
 
 
 
