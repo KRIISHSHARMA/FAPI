@@ -315,7 +315,7 @@ desynchronized:
   8. UCI.indication
   9. RACH.indication
 
-# 2.2.1 DELAY MANAGEMENT 
+## 2.2.1 DELAY MANAGEMENT 
 - This section describes two delay management mechanisms, based on receive window maintained at L1, per message type.
 - Note that receive windows are anchored to slots. The slot being anchored to is specific to each of the PDU(s) carried in the message.
 - In simpler terms, this section is talking about two ways to manage delays in a communication system. The delays are based on something called a "receive window," which is like a time frame during which a message is expected to be received.
@@ -328,9 +328,42 @@ desynchronized:
   -  Essentially, it's a way to make sure that different types of information within a message are processed and received at the right times, depending on their specific characteristics.
 
 
+## 2.2.1.1 Delay Management with Timestamps
+- For PHYs supporting both Delay Management and the nFAPI message format, the supported slot procedures are as documented in section 2.1.3 of SCF-225 [10].
+
+## 2.2.1.2 Delay Management without Timestamps
+- Where L2 and L1 cannot rely on time stamps, it is still possible to support Delay Management, as described in this section, to ensure that P7 slot procedures occur in a timely fashion.
 
 
+![dwvLlez](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/57837d03-563d-4c88-bdf1-f525c3fda4f2)
 
+
+1. a PHY instance expects P7 slot-based messages from VNF to reach the instance in a Receive Time Window interval, that PHY maintains to buffer and process time-critical P7 messages (DL_TTI.request, UL_TTI.request, UL_DCI.request, TX_DATA.request), to apply at their targeted slots.
+
+ - during this designated time window, the PHY instance is prepared to buffer and process these time-sensitive messages. The goal is to make sure that these messages are received and applied at the specific time slots they are intended for, ensuring timely and accurate communication.
+
+
+2. a Receive Timing Window is characterized by the following parameters, illustrated in Figure 2-11 of SCF-225 [10]:
+   1. a size (Timing Window)
+   2. offset prior to the targeted slot (<msg> Timing offset, where <msg> is one of the above-listed time-critical messages)
+      ![Q3kMUjC](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/9221cfbd-2c59-4d4e-b086-612b151b2528)
+
+
+3. relevant P7 messages for Slot S received by PHY Receive Window mechanism:
+   
+   1.**Inside the Timing Window interval**: Messages received during this time frame are dealt with right away. These messages typically involve actions related to sending data (transmission), receiving data (reception), or configuring settings. The actions are applied to a designated time slot called Slot S.
+   2. **Outside the Timing Window interval**: Messages arriving outside this designated time window are tagged by the PHY as either "too early" or "too late," depending on when they show up. These tagged messages are then collected to create a timing report, which is sent to Layer 2 (L2).
+
+
+5. the headers of P7 messages are not assumed to signal any time stamps.
+
+7. the L1 -> L2 timing report from 3.B above is TIMING.indication, as described in section 03.4.1A, which requires no time stamps in P7 messages.
+A. **TIMING.indication may be event-driven (by too-early, too-late events), or periodic, or both, per configuration.**
+
+8. an initial TIMING.indication message is triggered by transition of PHY into RUNNING state.
+   1. A. DL/UL Node Sync messages are not needed for the timestamp-free Delay Management mechanism in this section.
+   2. B. slot-level timing awareness between L2 and L1 may make use of TIMING.indication
+   3. C. L2 can adjust its transmission window based on TIMING.indication
 
 
 
