@@ -337,6 +337,7 @@ desynchronized:
 
 ![dwvLlez](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/57837d03-563d-4c88-bdf1-f525c3fda4f2)
 
+- this section describes a method of managing delays in communication without relying on timestamps, using a designated time window, and constructing timing reports for communication between L1 and L2. The provided figure illustrates a sequence where late-arriving messages trigger timing indications for corrective actions.
 
 1. a PHY instance expects P7 slot-based messages from VNF to reach the instance in a Receive Time Window interval, that PHY maintains to buffer and process time-critical P7 messages (DL_TTI.request, UL_TTI.request, UL_DCI.request, TX_DATA.request), to apply at their targeted slots.
 
@@ -365,13 +366,25 @@ A. **TIMING.indication may be event-driven (by too-early, too-late events), or p
    2. B. slot-level timing awareness between L2 and L1 may make use of TIMING.indication
    3. C. L2 can adjust its transmission window based on TIMING.indication
 
+# SFN (System Frame Number):
+1. SFN represents the System Frame Number, a unified time reference used to synchronize all nodes in the entire 5G NR network, including User Equipment (UE) and base stations.
+2. An SFN consists of a continuous set of 10 subframes, each subframe lasting 1 millisecond, making a total of 100 milliseconds. SFN is used to synchronize the system clock and coordinate communication between nodes
+
+# DL_TTI (Downlink Transmission Time Interval):
+1. DL_[TTI](https://devopedia.org/5g-nr-transmission-time-interval) refers to the time interval used for downlink data transmission.
+2. Base stations can allocate DL_TTI resources to different UEs for downlink data transmission as needed.
+3. During each DL_TTI, the base station schedules and allocates wireless resources for UE data transmission.
+4. UEs can obtain information about their downlink data transmission resource allocation by parsing Physical Downlink Control Channel (PDCCH) messages.
 
 
+## 2.2.2 SLOT signal
+- This section specifically applies to Physical Layer (PHY) implementations that support synchronization with Systen frame Number (SFN) and Slot (SL), as detailed in section 2.2.3.
 
+- A SLOT.indication message is sent from the PHY, to the L2/L3 software, indicating the start of a slot.
 
+- The periodicity of the SLOT.indication message is dependent on the numerology and illustrated in Figure 2-18, where the number of SLOT.indication messages per subframe is highlighted
 
-
-
+![sAYiyqk](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/af276000-e432-4f2a-940e-7af5e574cb9b)
 
 
 
