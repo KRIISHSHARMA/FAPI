@@ -429,12 +429,9 @@ internal SFN/SL to match the value provided by the L2/L3 software
 3. If SFN/SL M = N
    - The PHY received the SFN/SL it was expecting. No SFN/SL synchronization is required
 4. If SFN/SL M ≠ N
-   - The PHY received a different SFN/SL from the expected value. SFN/SL synchronization is required
-   - The PHY discards the received DL_TTI.request or UL_TTI.request message
-   - The PHY returns an ERROR.indication message indicating the mismatch
-   - PHY changes its internal SFN/SL to except N+1 in the next frame
-
-- This SFN/SL synchronization procedure will continue to discard DL_TTI.request or UL_TTI.request messages and emit ERROR.indication messages until the L2/L3 software corrects its SFN/SL value.
+ - The PHY received a different SFN/SL from the expected value. SFN/SL synchronization is required
+ - The PHY uses the SFN/SL received from the L2/L3 software. It changes its internal SFN/SL to match the value provided by the L2/L3 software
+ - The PHY returns an ERROR.indication message indicating the mismatch
 
 ![xTXu5fA](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/c44fe3d2-4d19-4383-9f97-70fc09b82b2f)
 
