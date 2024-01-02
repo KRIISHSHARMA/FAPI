@@ -386,6 +386,22 @@ A. **TIMING.indication may be event-driven (by too-early, too-late events), or p
 
 ![sAYiyqk](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/af276000-e432-4f2a-940e-7af5e574cb9b)
 
+## 2.2.3 SFN/SL Synchronization
+- The SFN/SL synchronization procedure is used to maintain a **consistent SFN/SL value between the L2/L3 software and PHY** . Maintaining this synchronization is important since different subframes and slots have different structures.
 
+- Two options are provided by the PHY API
+   1. Option 1: SFN/SL Configuration by L2/L3 Software
+      1. Initialization:
+         1. The PHY is set up to rely on the SFN/SL values provided by the L2/L3 software during the initial startup synchronization.
+         2. This involves configuring the PHY with the specific SFN/SL values communicated by the L2/L3 software.
+       2. Maintenance:
+          1. Ongoing synchronization is achieved by continuously using the SFN/SL values provided by the L2/L3 software.
+          2. The PHY regularly checks for updates or changes in the SFN/SL values from the L2/L3 software to maintain synchronization.
 
-
+ 2. Option 2: PHY Initialization of SFN/SL for Synchronous L2/L3 Software
+    1. Initialization:
+       1. The PHY takes the lead in initializing SFN/SL values, ensuringsynchronous operation with the L2/L3 software during startup synchronization.
+       2. This involves the PHY setting its own SFN/SL values and configuring the L2/L3 software to synchronize with these values.
+     2. Maintenance:
+        1. The synchronization is maintained by the PHY actively ensuring that the L2/L3 software remains synchronized with its SFN/SL values.
+        2. The PHY may periodically update or adjust its SFN/SL values, and the L2/L3 software adapts to these changes to stay synchronized.
