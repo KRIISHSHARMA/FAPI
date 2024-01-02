@@ -405,3 +405,40 @@ A. **TIMING.indication may be event-driven (by too-early, too-late events), or p
      2. Maintenance:
         1. The synchronization is maintained by the PHY actively ensuring that the L2/L3 software remains synchronized with its SFN/SL values.
         2. The PHY may periodically update or adjust its SFN/SL values, and the L2/L3 software adapts to these changes to stay synchronized.
+
+- The choice between Option 1 and Option 2 is made during the compilation of the software, determining which synchronization strategy will be employed.
+- This compile-time decision defines how the PHY and L2/L3 software will interact in terms of SFN/SL initialization and maintenance.
+
+
+## 2.2.3.1 L2/L3 software is master
+### Start up procedure
+1. After successful configuration the L2/L3 software sends a START.request message to move the PHY to the RUNNING state
+
+2. When the L2/L3 software is configured as master the initial PHY SFN/SL = M, where M could be any value. In the SLOT.indication message, SFN/SL = M
+
+3. The L2/L3 software sends a DL_TTI.request message to the PHY containing the correct SFN/SL = N
+  
+4. The PHY uses the SFN/SL received from the L2/L3 software. It changes its
+internal SFN/SL to match the value provided by the L2/L3 software
+
+![K0EqXxv](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/4d1eb35e-6892-43bf-a357-d82328bad34d)
+
+### Maintenance procedure 
+1. The PHY sends the SLOT.indication message with SFN/SL = M.
+2. The L2/L3 software sends a DL_TTI.request or UL_TTI.request message to the PHY containing SFN/SL = N
+3. If SFN/SL M = N
+   - The PHY received the SFN/SL it was expecting. No SFN/SL synchronization is required
+4. If SFN/SL M ≠ N
+   - The PHY received a different SFN/SL from the expected value. SFN/SL synchronization is required
+   - The PHY discards the received DL_TTI.request or UL_TTI.request message
+   - The PHY returns an ERROR.indication message indicating the mismatch
+   - PHY changes its internal SFN/SL to except N+1 in the next frame
+
+- This SFN/SL synchronization procedure will continue to discard DL_TTI.request or UL_TTI.request messages and emit ERROR.indication messages until the L2/L3 software corrects its SFN/SL value.
+
+![xTXu5fA](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/c44fe3d2-4d19-4383-9f97-70fc09b82b2f)
+
+# Why does the PHY need to send SFN/SL?
+- However, it’s possible the SFN/SL synchronization was unintended, and due to a L2/L3 software issue. The generation of an ERROR.indication message, with expected and received SFN/SL values, should allow the L2/L3 software to perform a correction with a further SFN/SL synchronization.
+
+# 2.2.3.2 L1 PHY is master
