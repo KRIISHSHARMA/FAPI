@@ -462,8 +462,7 @@ the PHY containing SFN/SL = M
 
 - This SFN/SL synchronization procedure will continue to discard DL_TTI.request request or UL_TTI.request messages and emit ERROR.indication messages until the L2/L3 software corrects its SFN/SL value.
 
-
-
+![atSOjWJ](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/e79c718d-180c-4a32-8649-f4a3c6ee6fc2)
 
 
 
