@@ -439,3 +439,33 @@ internal SFN/SL to match the value provided by the L2/L3 software
 - However, it’s possible the SFN/SL synchronization was unintended, and due to a L2/L3 software issue. The generation of an ERROR.indication message, with expected and received SFN/SL values, should allow the L2/L3 software to perform a correction with a further SFN/SL synchronization.
 
 # 2.2.3.2 L1 PHY is master
+### Start-up Procedure
+1. After successful configuration the L2/L3 software sends a START.request message to move the PHY to the RUNNING state
+2. If the L1 software is configured as master, the initial PHY SFN/SL = M. The value of M is not deterministic, and could have been set by an external mechanism, such as GPS.
+3. The PHY sends a SLOT.indication message to the L2/L3 software, with SFN/SL = M. The L2/L3 software uses the SFN/SL received from the PHY. It changes its internal SFN/SL to match the value provided by the PHY
+4. The L2/L3 software sends a DL_TTI.request or UL_TTI.request message to
+the PHY containing SFN/SL = M
+
+![sguJvfQ](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/32c8a2a6-93c9-40da-9f4e-09554b264650)
+
+### Maintenance Procedure
+1. In this example, the L1 PHY is expecting the next DL_TTI.request or UL_TTI.request to contain information regarding frame M. The procedure followed is:
+2. The PHY sends a SLOT.indication message to the L2/L3 software, with SFN/SL = M
+3. The L2/L3 software sends a DL_TTI.request or UL_TTI.request message to the PHY containing SFN/SL = N
+4. If SFN/SL M = N
+   - The PHY received the SFN/SL it was expecting. No SFN/SL synchronization is required
+
+5. If SFN/SL M ≠ N
+   - The PHY received a different SFN/SL from the expected value. SFN/SL synchronization is required
+   - The PHY discards the received DL_TTI.request or UL_TTI.request message
+   - The PHY returns an ERROR.indication message indicating the mismatch
+
+- This SFN/SL synchronization procedure will continue to discard DL_TTI.request request or UL_TTI.request messages and emit ERROR.indication messages until the L2/L3 software corrects its SFN/SL value.
+
+
+
+
+
+
+
+
