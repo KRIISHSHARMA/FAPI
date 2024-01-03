@@ -480,3 +480,102 @@ the PHY containing SFN/SL = M
 
 
 ## 2.2.4 API message order
+- **PHYs supporting Delay Management shall ignore any constraints relating to SLOT.indication or the relative order in which messages arrive for a particular slot. Instead, messages are expected in to arrive according to their Receive Windows, as documented in section 2.1.3.5 of SCF-225 [10].**
+
+- The PHY API has constraints of when certain messages can be sent, or will be received, by the L2/L3 software.
+  1. The downlink API message constraints
+      1. **SFN/SL in SLOT.indication and DL_TTI.request:**
+         1. The SFN/SL information included in the SLOT.indication message is expected to be present in the corresponding DL_TTI.request.
+         2. This ensures synchronization and consistency in the timing information between different messages.
+
+      2. **Reconfiguration with CONFIG.request:**
+        1. If the PHY is being reconfigured using the CONFIG.request message, it must be the first message for the slot.
+        2. This ensures that any reconfiguration happens before other slot-related messages.
+
+      3. **Skip_blank_DL_CONFIG and Skip_blank_UL_CONFIG Options:**
+        1. If the Skip_blank_DL_CONFIG option is indicated during the PARAM procedure, the DL_TTI.request can be optionally skipped when there is nothing to schedule.
+        2. Similarly, if the Skip_blank_UL_CONFIG option is indicated, the UL_TTI.request can be optionally skipped when there is nothing to schedule. Otherwise, these requests must be sent for every downlink and uplink slot, respectively.
+
+      4. **TX_DATA.request and UL_DCI.request Messages:**
+         1.The TX_DATA.request and UL_DCI.request messages are **optional**, meaning they are not required in every downlink slot.
+         2.Their inclusion depends on whether there is data to transmit or control information to convey.
+  
+      5. **Indication of Multiple Instances for DL_TTI.request, UL_TTI.request, UL_DCI.request, and TX_DATA:**
+         1. L1 (Layer 1) may indicate whether it can expect more than one instance of certain messages (DL_TTI.request, UL_TTI.request, UL_DCI.request, TX_DATA) for a slot.
+         2. If supported, L2 (Layer 2) may configure L1 to expect only a specific number of instances for these messages in a slot.
+
+      6. **Possibility of Multiple TX_DATA.request Instances with Mini-Slot Usage:**
+         1. In the case of mini-slot usage, there can be more than one instance of the TX_DATA.request.
+         2. This allows the PHY to minimize latency by transmitting data in smaller time intervals within a slot.
+
+![Bkrwo5mVh](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/97dfcd78-58f5-4bb8-b3a9-d838de77fc57)
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
