@@ -484,22 +484,23 @@ the PHY containing SFN/SL = M
 
 - The PHY API has constraints of when certain messages can be sent, or will be received, by the L2/L3 software.
   1. The downlink API message constraints
+
       1. **SFN/SL in SLOT.indication and DL_TTI.request:**
          1. The SFN/SL information included in the SLOT.indication message is expected to be present in the corresponding DL_TTI.request.
          2. This ensures synchronization and consistency in the timing information between different messages.
 
       2. **Reconfiguration with CONFIG.request:**
-        1. If the PHY is being reconfigured using the CONFIG.request message, it must be the first message for the slot.
-        2. This ensures that any reconfiguration happens before other slot-related messages.
+         1.  If the PHY is being reconfigured using the CONFIG.request message, it must be the first message for the slot.
+         2.  This ensures that any reconfiguration happens before other slot-related messages.
 
-      3. **Skip_blank_DL_CONFIG and Skip_blank_UL_CONFIG Options:**
+     3. **Skip_blank_DL_CONFIG and Skip_blank_UL_CONFIG Options:**
         1. If the Skip_blank_DL_CONFIG option is indicated during the PARAM procedure, the DL_TTI.request can be optionally skipped when there is nothing to schedule.
         2. Similarly, if the Skip_blank_UL_CONFIG option is indicated, the UL_TTI.request can be optionally skipped when there is nothing to schedule. Otherwise, these requests must be sent for every downlink and uplink slot, respectively.
 
       4. **TX_DATA.request and UL_DCI.request Messages:**
-         1.The TX_DATA.request and UL_DCI.request messages are **optional**, meaning they are not required in every downlink slot.
-         2.Their inclusion depends on whether there is data to transmit or control information to convey.
-  
+         1. The TX_DATA.request and UL_DCI.request messages are **optional**, meaning they are not required in every downlink slot.
+         2. Their inclusion depends on whether there is data to transmit or control information to convey.
+ 
       5. **Indication of Multiple Instances for DL_TTI.request, UL_TTI.request, UL_DCI.request, and TX_DATA:**
          1. L1 (Layer 1) may indicate whether it can expect more than one instance of certain messages (DL_TTI.request, UL_TTI.request, UL_DCI.request, TX_DATA) for a slot.
          2. If supported, L2 (Layer 2) may configure L1 to expect only a specific number of instances for these messages in a slot.
