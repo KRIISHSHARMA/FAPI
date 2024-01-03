@@ -1,4 +1,4 @@
-# 1. INTRO
+![BkxFsSQH3](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/9c6f6478-150b-4fa8-b332-1a2be906752b)# 1. INTRO
 
 ## 1.1 5G NR
 
@@ -533,27 +533,28 @@ symbol information is expected in the slot.
 ![SkWgn9QNn](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/b0580502-f480-480b-ab4c-f66ad6e62f4d)
 
 
+## 2.2.5 Downlink
+- The procedures relating to downlink transmission are described in this Section.
+
+## 2.2.5.1 BCH
+- The BCH transport channel is used to transmit the Master Information Block (MIB) information to the UE
+- It has a periodicity of 80ms.BCH payload is carried using the PBCH physical channel. Together with the PSS and the SSS synchronization signals, PBCH forms the Synchronization Signal Block (SSB),
+
+![rkZW1i74h](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/f8e86feb-8eb6-4bfe-94ba-2170e629d6e2)
+![rk8B1kEE3](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/ca5e6ead-d855-48eb-9a8b-eeed00a8862c)
+![Hk__Jk443](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/d3dc5a48-1c08-443a-ac27-db42ed809131)
 
 
+## 2.2.5.2 PCH
+- The PCH transport channel is used to transmit paging messages to the UE
+- The UE has specific paging occasions where it listens for paging information Figure 2 28
+- The L2/L3 software is responsible for calculating the correct paging occasion for a UE. The PHY is only responsible for transmitting PCH PDUs when instructed by the DL_TTI.request message.
 
+![BkxFsSQH3](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/d6d7aa9e-c96d-4612-acb0-5c8a765a85fd)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- To transmit a PCH PDU the L2/L3 software must provide the following information:
+  - In DL_TTI.request a PDSCH PDU and PDCCH PDU are included.
+  - In TX_DATA.request a MAC PDU containing the paging message is included.
 
 
 
