@@ -483,7 +483,7 @@ the PHY containing SFN/SL = M
 - **PHYs supporting Delay Management shall ignore any constraints relating to SLOT.indication or the relative order in which messages arrive for a particular slot. Instead, messages are expected in to arrive according to their Receive Windows, as documented in section 2.1.3.5 of SCF-225 [10].**
 
 - The PHY API has constraints of when certain messages can be sent, or will be received, by the L2/L3 software.
-  1. The downlink API message constraints
+1. The downlink API message constraints
 
       1. **SFN/SL in SLOT.indication and DL_TTI.request:**
          1. The SFN/SL information included in the SLOT.indication message is expected to be present in the corresponding DL_TTI.request.
@@ -511,7 +511,7 @@ the PHY containing SFN/SL = M
 
 ![Bkrwo5mVh](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/97dfcd78-58f5-4bb8-b3a9-d838de77fc57)
 
-  
+  2. The uplink API message constraints
 
 
 
