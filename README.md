@@ -511,11 +511,26 @@ the PHY containing SFN/SL = M
 
 ![Bkrwo5mVh](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/97dfcd78-58f5-4bb8-b3a9-d838de77fc57)
 
-  2. The uplink API message constraints
+2. The uplink API message constraints
 
+- **The UL API messages are optional. It is not a requirement that they are sent in every slot.**
+- If present, the messages can be in any order
+  1. The **CRC.indication** message is included if uplink data PDUs were expected in the slot.
+  2. The **RX_DATA.indication** message is included if uplink data PDUs were expected in the slot.
+  3. The **UCI.indication** message is included if UCI PDUs were expected in the slot.
+  4. The **RACH.indication** message is included if any RACH preambles were detected in the slot
+  5. The **SRS.indication** message is included if any sounding reference
+symbol information is expected in the slot.
+  
+- L1 may indicate whether it can generate more than one instance of CRC.indication, RX_DATA.indication, UCI.indication, RACH.indication, SRS.indication or DL_TTI.response per slot and subcarrier spacing. If supported by L1, L2 may configure L1 to limit itself to only one instance of the CRC.indication, RX_DATA.indication, UCI.indication, RACH.indication, and SRS.indication messages per slot and subcarrier-spacing.
 
+- There can be more than one instance of the CRC.indication, RX_DATA.indication, UCI.indication, RACH.indication, and SRS.indication messages if more than one subcarrier spacing finishes in the same slot. As an example, from Figure 2-18, slot 7 for u=3 completes at the same time as slot 1 for u=1.
 
+![sAYiyqk](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/41a6cfa6-24af-40b2-830f-83dde6218b4f)
 
+- There can be more than one instance of the CRC.indication and RX_DATA.indication if mini-slot is used. This allows the PHY to minimize latency.
+
+![SkWgn9QNn](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/b0580502-f480-480b-ab4c-f66ad6e62f4d)
 
 
 
