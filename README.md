@@ -464,7 +464,19 @@ the PHY containing SFN/SL = M
 
 ![atSOjWJ](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/e79c718d-180c-4a32-8649-f4a3c6ee6fc2)
 
+## 2.2.3a Slot Numerology
+1. Slot Value Setting in L2-initiated Slot-carrying P7 API:
+   - The slot value in the L2-initiated Slot-carrying P7 API is set based on the highest numerology configured among all numerologies across both uplink and downlink traffic directions and channels.
+   - This means that the slot value is determined by the highest numerology, ensuring consistency and synchronization in the communication system.
+  
+2. Channel-specific PDUs in P7 API:
+   - Channel-specific PDUs initiated by L2 shall only be carried in those P7 APIs where the slot starts, according to the P7 slot numerology, coincide with the start of the channel slot based on the Channel PDU numerology.
+   - This rule ensures that Channel-specific PDUs are appropriately aligned with the timing specified by the numerology configurations.
+
+3. Example Illustration:
+   - An example is provided to illustrate the concept: If the highest P7 numerology is 60 kHz, and the Channel PDU numerology is 15 kHz (e.g., PUSCH PDU):
+     - In the UL_TTI.request API, these 15 kHz PDUs are expected only when values of 60 kHz slots are divisible by 4.
+     - This example demonstrates the specific conditions under which certain PDUs are expected in the UL_TTI.request API based on numerology configurations.
 
 
-
-
+## 2.2.4 API message order
