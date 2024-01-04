@@ -577,12 +577,13 @@ symbol information is expected in the slot.
     - **PUSCH PDU** – is used if the UE is scheduled to transmit data and the ACK/NACK response
     - **PUCCH PDU** – is used if the UE is just scheduled to transmit the ACK/NACK response
 
+ 4. The PHY will return the ACK/NACK response information in the **UCI.indication** message
 
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/ea1669b0-d582-4371-8d1a-eae3fbe17bce)
 
+-[image reference](https://hackmd.io/@MingHung/StudyBook/%2F%40MingHung%2FFAPI#22-slot-P7)
 
-
-
-
+![H1HzOxUrn](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/e2b2f13c-5685-4085-88fa-e6d44769dd63)
 
 
 
