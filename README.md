@@ -1,4 +1,4 @@
-![BkxFsSQH3](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/9c6f6478-150b-4fa8-b332-1a2be906752b)# 1. INTRO
+# 1. INTRO
 
 ## 1.1 5G NR
 
