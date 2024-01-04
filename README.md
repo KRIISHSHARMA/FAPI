@@ -556,21 +556,26 @@ symbol information is expected in the slot.
   - In DL_TTI.request a PDSCH PDU and PDCCH PDU are included.
   - In TX_DATA.request a MAC PDU containing the paging message is included.
 
+## 2.2.5.3 DL-SCH
+![285506746-020732cb-1e6b-45a9-b14a-e486dae19033](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/535d8f6e-413c-4ae1-bd76-97a05d5039fd)
+![NR_ChannelStructure_01](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/243f3765-dec6-4601-88bc-50acdfaf8727)
 
+-[photo reference](https://www.sharetechnote.com/html/5G/5G_ChannelMapping.html)
 
+-[more on this](https://github.com/KRIISHSHARMA/5G_TECHNOLOGY_ARCHITECTURE_AND_PROTOCOLS/blob/main/5G_NR_AIR_INTERFACE.md#5g-nr-logical-channels)
 
+- DL-SCH data transfer :	Do everything needed to perform DL Data Transfer (DCI-Scheduling, HARQ etc)
+- The **DL-SCH transport channel** is used to send data from the gNB to a single UE.
+- [HARQ](https://www.sharetechnote.com/html/5G/5G_HARQ.html) is always applied on the DL-SCH transport channel at least for unicast PDSCH.
+- Therefore, when scheduling a downlink PDSCH transmission which will require [HARQ](https://www.sharetechnote.com/html/5G/5G_HARQ.html)-ACK feedback from UE, **the L2/L3 software has to schedule uplink transmission on PUCCH or PUSCH for the UE to feed back an ACK/NACK response.**
+- To transmit a DL-SCH PDU, the L2/L3 software must provide the following information:
 
+ 1. In **DL_TTI.request** a PDSCH PDU and PDCCH PDU are included. The PDCCH PDU contains control regarding the DL frame transmission
+ 2. In **TX_DATA.request** a MAC PDU containing the data is included
+ 3. At the expected slot **[UCI](https://github.com/KRIISHSHARMA/5G_TECHNOLOGY_ARCHITECTURE_AND_PROTOCOLS/blob/main/5G_NR_AIR_INTERFACE.md#uci-ul-control-information) HARQ** information is included in a later **UL_TTI.request**, where the timing of this message is variable. The HARQ can be sent on the PUSCH or PUCCH, therefore, the information of the HARQ response on the uplink is sent in either:
 
-
-
-
-
-
-
-
-
-
-
+    - **PUSCH PDU** – is used if the UE is scheduled to transmit data and the ACK/NACK response
+    - **PUCCH PDU** – is used if the UE is just scheduled to transmit the ACK/NACK response
 
 
 
