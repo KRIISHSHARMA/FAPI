@@ -613,6 +613,8 @@ symbol information is expected in the slot.
 - [CSI-RS](https://www.sharetechnote.com/html/5G/5G_CSI_RS.html)
 - [PRS](https://www.sharetechnote.com/html/5G/5G_Positioning.html#:~:text=The%205G%20Positioning%20Reference%20Signal,networks%20to%20support%20positioning%20services.)
 
+- CSI-RS and PRS transmissions are not dependent on PDSCH transmission, or on each other. Instead, CSI-RS or PRS can be sent to a UE in the same slot as a PDSCH transmission, or in a slot with no PDSCH transmission for the UE. There is also no dependency between CSI-RS and PRS transmissions.
+
 
 
 
