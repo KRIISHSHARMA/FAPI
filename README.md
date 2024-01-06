@@ -585,17 +585,33 @@ symbol information is expected in the slot.
 
 ![H1HzOxUrn](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/e2b2f13c-5685-4085-88fa-e6d44769dd63)
 
+- With DCI Format 1-1, the DL SCH channel can send two data transport blocks to a UE. This requires a single PDCCH (DCI) PDU, a single PDSCH PDU and two MAC PDUs.
+- To initiate a transmission of two data transport. blocks, the L2/L3 software must provide the following information:
 
+  1. In the first transmission slot in the DL_TTI.request a PDSCH and PDCCH (DCI) PDU is included. The PDCCH PDU contains control regarding the DL frame transmission. A PDSCH PDU includes two codewords, one for each transport block specified in the DCI PDU.
+  2. In TX_DATA.request two MAC PDUs containing the data are included.
 
+- remaining behaviour is identical to single yaler transmission
 
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/ac38c722-b73c-4af2-bec8-42902f23e4e3)
 
+- Multi-slot transmission is also an option for the DL-SCH, where the same MAC PDU is transmitted for N slots. The procedure is shown in Figure 2-31, and the L2/L3 must provide the following information:
+  1. In DL_TTI.request a PDSCH PDU and PDCCH (DCI) PDU is included. The PDCCH PDU contains control regarding the DL frame transmission and the UE will have previously been configured to be aware that multi-slot transmission is used.
+  2. In TX_DATA.request a MAC PDUs containing the data is included.
+  3. The multi-slot transmission can be over 2,4 or 8 slots and for the remaining slots the L2/L3 software must provide the following information:
+     1. In DL_TTI.request a PDSCH PDU is included. The PDSCH PDU contains the information for this slot, for example, in multi-slot transmission the incremental redundancy version changes per slot.
+     2. In TX_DATA.request MAC PDU(s) containing the data is/are included
 
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/9ced6d44-c454-4c01-ad68-35ec6bacdd0c)
 
+## 2.2.5.4 Downlink Reference Signals
 
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/b3954e33-3e6e-4caa-9eba-c14a06c96a26)
 
-
-
-
+- [DMRS](https://www.sharetechnote.com/html/5G/5G_PDSCH_DMRS.html) for PDSCH and PDCCH
+- [PTRS](https://www.sharetechnote.com/html/5G/5G_PTRS_DL.html) for PDSCH
+- [CSI-RS](https://www.sharetechnote.com/html/5G/5G_CSI_RS.html)
+- [PRS](https://www.sharetechnote.com/html/5G/5G_Positioning.html#:~:text=The%205G%20Positioning%20Reference%20Signal,networks%20to%20support%20positioning%20services.)
 
 
 
