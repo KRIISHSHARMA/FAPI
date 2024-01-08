@@ -665,7 +665,15 @@ message.
 
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/f3b215c1-80c9-4086-a38d-38a7160b7f70)
 
+## 2.2.6.6 Uplink Reference Signals
+- [DMRS](https://www.sharetechnote.com/html/5G/5G_PDSCH_DMRS.html) for PUSCH and PUCCH
+- [PTRS](https://www.sharetechnote.com/html/5G/5G_PTRS_DL.html) for PUSCH
+- SRS(2.2.6.3 SRS)
 
+
+- The reference signals transmitted for either PUSCH or PUCCH are included in the UL_TTI.request PUSCH or PUCCH PDUs, respectively. However, to transmit a SRS the UL_TTI.request includes a SRS PDU
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/651bbd46-022c-4f99-98de-4b5f1232eccc)
 
 
 
