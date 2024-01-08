@@ -643,14 +643,27 @@ symbol information is expected in the slot.
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/4a611a13-1562-4fde-8113-b021798a8138)
 
 ## 2.2.6.3 SRS
+- The sounding reference signal (SRS) is used by L2/L3 software to determine the **quality of the uplink channel**.
+- The PHY will return the SRS response to the L2/L3 software in the **SRS.indication** message
 
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/6077013a-bbde-4a0c-b8d2-8877fa432a4d)
 
+## 2.2.6.4 CSI
+- The CSI reporting mechanism is used by the L2/L3 software to determine the quality of the downlink channel
+- For an aperiodic report the PDCCH PDU is included in the **UL_DCI.request**. This instructs the UE to send a CSI report. For periodic CSI report no explicit DCI information is sent.
+- If a PUSCH is scheduled for UCI then a PUSCH PDU is included with the CSI configuration information.
+- Otherwise, a PUCCH is scheduled with the CSI configuration information.
+- The PHY will return the CSI report to the L2/L3 software in the **UCI.indication** message
 
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/53edeb87-1ffd-4e69-9381-dfe81e593c73)
 
+## 2.2.6.5 SR
+- The scheduling request (SR) procedure is used by the UE to request additional uplink bandwidth
+- The L2/L3 software configures the **SR procedure during the RRC connection procedure.**
+- The PHY will return the SR to the L2/L3 software in the **UCI.indication**
+message.
 
-
-
-
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/f3b215c1-80c9-4086-a38d-38a7160b7f70)
 
 
 
