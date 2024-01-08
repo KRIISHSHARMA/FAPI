@@ -615,6 +615,24 @@ symbol information is expected in the slot.
 
 - CSI-RS and PRS transmissions are not dependent on PDSCH transmission, or on each other. Instead, CSI-RS or PRS can be sent to a UE in the same slot as a PDSCH transmission, or in a slot with no PDSCH transmission for the UE. There is also no dependency between CSI-RS and PRS transmissions.
 
+## 2.2.6 Uplink
+
+## 2.2.6.1 RACH
+- The RACH transport channel is **used by the UE to send data to the gNB when it has no scheduled resources**
+- the L2/L3 software can indicate to the UE that it should initiate a RACH procedure.
+- In the scope of the PHY API, the RACH procedure begins when the PHY receives an **UL_TTI.request message** indicating the presence of a PRACH slot.
+
+-  To configure a RACH procedure the L2/L3 software must provide the following information:
+  1. The **UL_TTI.request** is sent to the PHY including a RACH PDU
+  2. If a UE decides to RACH, and a preamble is detected by the PHY:
+     1. The PHY will include 1 RACH PDU for each FD and TD occasion in the **RACH.indication** message. __This RACH PDU includes all detected preambles__
+  3. If no RACH preamble is detected by the PHY, then **no** **RACH.indication** message is sent
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/e64c33f3-619d-4b90-a914-d0024d645fc4)
+
+
+
+
 
 
 
