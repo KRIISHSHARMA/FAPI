@@ -630,6 +630,39 @@ symbol information is expected in the slot.
 
 ![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/e64c33f3-619d-4b90-a914-d0024d645fc4)
 
+## 2.2.6.2 UL-SCH
+- The UL-SCH transport channel is used to send data from the UE to the gNB
+- HARQ is always applied on the UL-SCH transport channel and the ACK/NACK value is indicated when the next transmission for the HARQ process is scheduled via DCI. Therefore, included in the next iteration of this procedure.
+- To transmit an UL-SCH PDU, the L2/L3 software must provide the following information:
+ 1. Within the **UL_DCI.request** for slot N a DCI PDU is included. The DCI PDU contains control information regarding the **UL frame transmission** being scheduled and indicates new data or retransmission for a specified HARQ process.
+ 2. In **UL_TTI.request** for slot N+K1 an PUSCH PDU is included, where the value of K1 is variable
+ 3. The PHY will return CRC information for the received data in the **CRC.indication** message
+ 4. The PHY will return the received uplink data in the **RX_DATA.indication** message.
+ 5. If UCI information was expected in the uplink slot, the PHY will return the **UCI.indication** message.(opt)
+
+![image](https://github.com/KRIISHSHARMA/FAPI/assets/86760658/4a611a13-1562-4fde-8113-b021798a8138)
+
+## 2.2.6.3 SRS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
